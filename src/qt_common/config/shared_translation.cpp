@@ -185,6 +185,12 @@ std::unique_ptr<TranslationMap> InitializeTranslations(QObject* parent) {
               "checked, when it can't run on this GPU, with resolution scaling, and for the rest "
               "of the session if its output fails Lichii's checks.\nTakes effect when a game "
               "starts."));
+    INSERT(Settings, game_dlss_skip_check, tr("Skip the game's DLSS health check (experimental)"),
+           tr("Lichii normally compares the output of a game's own DLSS with the game's image, and "
+              "draws AMD FSR 3.1 instead while it looks frozen or corrupted.\nChecked, the game's "
+              "DLSS stays on screen even when its output fails the checks, so the picture never "
+              "switches to AMD FSR 3.1 and back. Output with NaN or infinite values is no longer "
+              "caught either."));
     INSERT(Settings, frame_rate_limit, tr("Frame rate limit (Switch 2):"),
            tr("Rate of the Switch 2 VSync event that games start their frames on (default 60 Hz)."
               "\nAbove 60 Hz most games run too fast; use it with a game patch that follows real "

@@ -399,6 +399,10 @@ struct Values {
     // its output passes the checks.
     SwitchableSetting<bool> game_dlss_network{linkage, false, "game_dlss_network",
                                               Category::Renderer};
+    // Experimental: on, the game's DLSS network is shown without checking its output (as where it
+    // can't be probed), so it never switches to the replacement upscale for mismatched output.
+    SwitchableSetting<bool> game_dlss_skip_check{linkage, false, "game_dlss_skip_check",
+                                                 Category::Renderer};
     SwitchableSetting<int, true> fsr_sharpening_slider{linkage,
 #ifdef __ANDROID__
                                                        0,

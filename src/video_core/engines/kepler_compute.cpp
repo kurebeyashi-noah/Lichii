@@ -879,6 +879,15 @@ bool KeplerCompute::DlssNetworkDroppedForGood() const {
 // and is shown again once DLSS_NETWORK_GOOD_CHECKS checks in a row pass, until it has been dropped
 // DLSS_NETWORK_MAX_DROPS times.
 void KeplerCompute::CheckDlssNetwork() {
+    // "Skip the game's DLSS health check" (experimental): shown without checks, as where the output
+    // can't be probed, and a drop for mismatched output ends.
+    if (Settings::values.game_dlss_skip_check.GetValue()) {
+        dlss_chain.checked = false;
+        if (dlss_chain.failure == VideoCore::GameDlssReason::OutputMismatch) {
+            dlss_chain.failure = VideoCore::GameDlssReason::None;
+        }
+        return;
+    }
     dlss_chain.checked = rasterizer->CanProbeGameDlssOutput();
     if (!dlss_chain.checked) {
         return;
